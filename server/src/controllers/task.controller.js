@@ -3,8 +3,16 @@ import AppError from '../utils/application_errors';
 
 export async function createTask (req, res, next) {
   try {
+    const {authorizationData: {id: ownerId}} = req;
+    const task = req.body;
+    task.userId = ownerId;
+    const createdTask = await Task.create(task);
 
-    const { authorizationData: { id: ownerId } } = req;
+    if (createdTask) {
+      return res.send(createdTask)
+    } else {
+      next(new AppError.BadRequest());
+    }
 
   } catch (e) {
     next( e );

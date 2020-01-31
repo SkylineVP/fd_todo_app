@@ -1,13 +1,14 @@
-import express     from 'express';
-import { getTask } from '../controllers/task.controller.js';
+import express from 'express';
+import {getTask, createTask} from '../controllers/task.controller.js';
+
 
 const taskRouter = express.Router();
 
-taskRouter.post( '', );
+taskRouter.post('/', createTask);
 /*
  * only owner
  * */
-taskRouter.get( '/:taskId', getTask );
+taskRouter.get('/:taskId', getTask);
 /*
  * only owner
  * */
